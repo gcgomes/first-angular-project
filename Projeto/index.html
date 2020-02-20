@@ -1,10 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" ng-app="listaTelefonica">
 <head>
     <meta charset="UTF-8">
     <title>Lista Telefônica</title>
+    <link rel="stylesheet" href="lib/bootstrap/bootstrap.css">
+    <style>
+        .jumbotron {
+            width: 400px;
+            text-align: center;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 20px;
+        }
+        .table {
+            margin-top: 20px;
+        }
+        .form-control {
+            margin-bottom: 5px;
+        }
+    </style>
+    <script src="lib/angular/angular.js"></script>
+    <script>
+        angular.module("listaTelefonica", []);
+        angular.module("listaTelefonica").controller("listaTelefonicaCtrl", function ($scope) {
+            $scope.app = "Lista Telefônica"
+            $scope.contatos = [
+                {nome: "Pedro", telefone: "9999-8888"},
+                {nome: "Ana", telefone: "9999-8877"},
+                {nome: "Maria", telefone: "9999-8866"}
+            ];
+            $scope.adicionarContato = function (contato) {
+                // Método incorreto
+                // $scope.contatos.push({nome: $scope.nome, telefone: $scope.telefone});
+                // Método correto (utilizando parâmetros (nome, telefone)
+                // $scope.contatos.push({nome: nome, telefone: telefone});
+                // Otimização (utiliza um objeto como parâmetro)
+                $scope.contatos.push(angular.copy(contato));
+                delete $scope.contato;
+            };
+        });
+    </script>
 </head>
-<body>
-
+<body ng-controller="listaTelefonicaCtrl">
+    <div class="jumbotron">
+        <h3 ng-bind="app"></h3>
+        <table class="table table-striped">
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+            </tr>
+            <tr ng-repeat="contato in contatos">
+                <!--  Primeira Forma de utilizar o ng-repeat  -->
+                <td>{{contato.nome}}</td>
+                <td>{{contato.telefone}}</td>
+                <!--  Segunda Forma de utilizar o ng-repeat  -->
+<!--                <td ng-repeat="(key, value) in contato">-->
+<!--                    {{value}}-->
+<!--                </td>-->
+            </tr>
+        </table>
+        <hr/>
+        <input type="text" ng-model="contato.nome" class="form-control" placeholder="Nome">
+        <input type="text" ng-model="contato.telefone" class="form-control" placeholder="Telefone">
+        <button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)">Adicionar Contato</button>
+    </div>
 </body>
 </html>
