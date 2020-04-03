@@ -1,0 +1,27 @@
+Curiosidades Node.JS
+O node processa tudo em uma única thread, utilizando um event loop.
+Porém no I/O, ele é não bloqueante e inicialmente possui 4 threads alocadas,
+ou seja não possui thread em estado de wait.
+
+Diferenças do nginx para o apache
+O apache trabalha com alocação de threads por conexão, para um número muito
+altode conexões as respostas que ele pode processar caem severamente, porém
+o nginx mantém uma constância bem maior.
+No caso do consumo de memória, o apache tem um aumento significativo por
+número de conexões, no caso do nginx esse valor se mantém constante por
+causa do event loop
+
+Plataforma de código aberto, composta pela junção do interpretador V8 do
+Google, da bibliotea libuv e um conjunto de módulos.
+
+Usando módulos no Node
+- Tudo dentro de um módulo é privado
+- Para importar é utilizado o require('path')
+- A função do módulo é exportada utilizando module.exports
+
+Global Objects
+Para definir variável global (global.var_name, GLOBAL.var_name, root.var_name)
+
+Timers
+- Servem para agendar a execução de funções
+setTimeout(função, tempo até iniciar  execução em ms)
