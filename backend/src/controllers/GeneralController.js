@@ -19,9 +19,11 @@ module.exports = {
     return response.json(contacts);
   },
   createContact(request, response) {
-    const contact = request.body;
+    const {nome, telefone, operadora} = request.body;
 
-    contacts.push(contact);
+    const contato = {id: contacts.length + 1, nome: nome, telefone: telefone, data: new Date(), operadora: operadora};
+
+    contacts.push(contato);
 
     return response.json({ message: "Operação concluída com sucesso!" });
   }
